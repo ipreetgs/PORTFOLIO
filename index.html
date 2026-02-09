@@ -1,473 +1,763 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gurpreet Singh - Portfolio</title>
-    <!-- Tailwind CSS v3 CDN -->
+    <title>Gurpreet Singh - DevOps Engineer</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" href="g.jpg" type="image/x-icon">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-      html { scroll-behavior: smooth; }
-      .modal-bg { background: rgba(0,0,0,0.6); }
-      .reveal { opacity: 0; transform: translateY(40px); transition: all 0.7s cubic-bezier(.4,0,.2,1); }
-      .reveal.visible { opacity: 1; transform: none; }
-      .glass {
-        background: rgba(255,255,255,0.25);
-        box-shadow: 0 8px 32px 0 rgba(31,38,135,0.37);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border-radius: 1.5rem;
-        border: 1px solid rgba(255,255,255,0.18);
-      }
-      .animated-gradient {
-        background: linear-gradient(-45deg, #a78bfa, #f472b6, #facc15, #38bdf8);
-        background-size: 400% 400%;
-        animation: gradientBG 18s ease-in-out infinite;
-      }
-      @keyframes gradientBG {
-        0% {background-position:0% 50%}
-        25% {background-position:50% 100%}
-        50% {background-position:100% 50%}
-        75% {background-position:50% 0%}
-        100% {background-position:0% 50%}
-      }
-      /* Section entrance animations */
-      .fade-in-up { opacity: 0; transform: translateY(40px); transition: all 1s cubic-bezier(.4,0,.2,1); }
-      .fade-in-up.visible { opacity: 1; transform: none; }
-      .fade-in-left { opacity: 0; transform: translateX(-40px); transition: all 1s cubic-bezier(.4,0,.2,1); }
-      .fade-in-left.visible { opacity: 1; transform: none; }
-      .fade-in-right { opacity: 0; transform: translateX(40px); transition: all 1s cubic-bezier(.4,0,.2,1); }
-      .fade-in-right.visible { opacity: 1; transform: none; }
-      .zoom-in { opacity: 0; transform: scale(0.95); transition: all 1s cubic-bezier(.4,0,.2,1); }
-      .zoom-in.visible { opacity: 1; transform: scale(1); }
-      /* Card hover lift/glow */
-      .card-anim { transition: transform 0.3s, box-shadow 0.3s; }
-      .card-anim:hover { transform: translateY(-8px) scale(1.03); box-shadow: 0 8px 32px 0 rgba(80,80,200,0.18); }
-      /* Animated SVG wave */
-      .wave-anim path { animation: waveMove 6s linear infinite alternate; }
-      @keyframes waveMove {
-        0% { d: path('M0,0 C150,80 350,0 500,80 L500,00 L0,0 Z'); }
-        50% { d: path('M0,0 C120,60 380,20 500,60 L500,00 L0,0 Z'); }
-        100% { d: path('M0,0 C150,80 350,0 500,80 L500,00 L0,0 Z'); }
-      }
-      /* Animated icons */
-      .icon-bounce { animation: bounce 1.5s infinite; }
-      .icon-pulse { animation: pulse 2s infinite; }
-      .icon-wiggle { animation: wiggle 1.2s infinite; }
-      @keyframes wiggle {
-        0%,100% { transform: rotate(-5deg); }
-        50% { transform: rotate(5deg); }
-      }
-      /* Chat modal pop/slide */
-      .modal-anim { opacity: 0; transform: scale(0.95) translateY(40px); transition: all 0.5s cubic-bezier(.4,0,.2,1); }
-      .modal-anim.visible { opacity: 1; transform: scale(1) translateY(0); }
-      /* Chat message fade/slide */
-      .msg-anim { opacity: 0; transform: translateY(20px); transition: all 0.5s cubic-bezier(.4,0,.2,1); }
-      .msg-anim.visible { opacity: 1; transform: none; }
-      /* Button ripple */
-      .ripple { position: relative; overflow: hidden; }
-      .ripple:after { content: ''; position: absolute; left: 50%; top: 50%; width: 0; height: 0; background: rgba(99,102,241,0.2); border-radius: 100%; transform: translate(-50%,-50%); transition: width 0.4s ease, height 0.4s ease; z-index: 0; }
-      .ripple:active:after { width: 200px; height: 200px; }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #4f46e5;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4338ca;
+        }
+
+        /* Animation Utilities */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .glass-panel {
+            background: rgba(17, 24, 39, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #818cf8, #c084fc, #38bdf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #818cf8;
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Ask Me Bot Anim */
+        .bot-message {
+            animation: popIn 0.3s ease-out forwards;
+            transform-origin: bottom left;
+        }
+
+        .user-message {
+            animation: popIn 0.3s ease-out forwards;
+            transform-origin: bottom right;
+        }
+
+        @keyframes popIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
     </style>
-</head>
-<body class="font-sans antialiased bg-gradient-to-br from-indigo-200 via-purple-100 to-yellow-50 min-h-screen transition-colors duration-500" id="body-root">
-    <!-- Dark/Light Mode Toggle -->
-    <button id="theme-toggle" class="fixed top-6 right-6 z-40 bg-white/70 dark:bg-gray-900/80 text-gray-900 dark:text-white rounded-full shadow-lg p-2 text-xl focus:outline-none border border-gray-200 dark:border-gray-700 transition-colors duration-300 ripple" aria-label="Toggle dark mode">
-      <span id="theme-icon" class="icon-bounce">🌙</span>
-    </button>
-    <!-- Navbar -->
-    <header class="bg-gray-900 text-white shadow-md fixed w-full z-20 top-0">
-        <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="text-lg font-bold">Gurpreet Singh</div>
-            <button id="menu-btn" class="md:hidden focus:outline-none" aria-label="Open Menu">
-                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
-            </button>
-            <ul id="nav-list" class="hidden md:flex space-x-4 text-base font-medium">
-                <li><a href="#home" class="hover:text-indigo-300 transition">Home</a></li>
-                <li><a href="#about" class="hover:text-indigo-300 transition">About</a></li>
-                <li><a href="#experience" class="hover:text-indigo-300 transition">Experience</a></li>
-                <li><a href="#projects-skills" class="hover:text-indigo-300 transition">Projects & Skills</a></li>
-                <li><a href="#education-cv" class="hover:text-indigo-300 transition">Education & CV</a></li>
-                <li><a href="#recommendations" class="hover:text-indigo-300 transition">Recommendations</a></li>
-                <li><a href="#certifications" class="hover:text-indigo-300 transition">Certifications</a></li>
-            </ul>
-        </nav>
-        <!-- Mobile menu -->
-        <ul id="mobile-menu" class="md:hidden bg-gray-900 text-white px-4 pb-4 hidden flex-col space-y-2">
-            <li><a href="#home" class="block py-2 hover:text-indigo-300 transition">Home</a></li>
-            <li><a href="#about" class="block py-2 hover:text-indigo-300 transition">About</a></li>
-            <li><a href="#experience" class="block py-2 hover:text-indigo-300 transition">Experience</a></li>
-            <li><a href="#projects-skills" class="block py-2 hover:text-indigo-300 transition">Projects & Skills</a></li>
-            <li><a href="#education-cv" class="block py-2 hover:text-indigo-300 transition">Education & CV</a></li>
-            <li><a href="#recommendations" class="block py-2 hover:text-indigo-300 transition">Recommendations</a></li>
-            <li><a href="#certifications" class="block py-2 hover:text-indigo-300 transition">Certifications</a></li>
-        </ul>
-    </header>
-    <main class="pt-24">
-    <!-- Hero Section -->
-    <section id="home" class="min-h-screen flex items-center justify-center animated-gradient text-white relative overflow-hidden">
-        <div class="text-center space-y-4 reveal glass p-8 fade-in-up">
-            <img src="pic1.jpg" alt="Gurpreet Singh" class="w-32 h-32 rounded-full mx-auto mb-2 border-4 border-white shadow-lg animate-pulse icon-bounce">
-            <h1 class="text-5xl font-extrabold mb-1 drop-shadow-lg">Gurpreet Singh <span class="icon-wiggle">👋</span></h1>
-            <p class="text-2xl font-medium">DevOps | Ethical Hacking & VAPT | Digital Forensics | Python | OSINT</p>
-            <p class="text-lg">TestingXperts, Firozpur, India</p>
-            <div class="flex flex-col sm:flex-row justify-center items-center gap-2 text-base">
-                <span>Email: <a href="mailto:preetgur.gsr@gmail.com" class="underline hover:text-yellow-200">preetgur.gsr@gmail.com <span class="icon-pulse">✉️</span></a></span>
-                <span>GitHub: <a href="https://github.com/ipreetgs" target="_blank" class="underline hover:text-yellow-200">ipreetgs <span class="icon-bounce">🐙</span></a></span>
-                <span>LinkedIn: <a href="https://www.linkedin.com/in/ipreetgs/" target="_blank" class="underline hover:text-yellow-200">linkedin.com/in/ipreetgs <span class="icon-pulse">💼</span></a></span>
-                <span>Contact: <a href="https://igli.me/ipreetgs" target="_blank" class="underline hover:text-yellow-200">igli.me/ipreetgs <span class="icon-bounce">🔗</span></a></span>
-            </div>
-        </div>
-        <!-- SVG Wavy Divider -->
-        <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none rotate-180 wave-anim" style="height: 80px;">
-          <svg viewBox="0 0 500 80" preserveAspectRatio="none" class="w-full h-full">
-            <path d="M0,0 C150,80 350,0 500,80 L500,00 L0,0 Z" fill="#fff" fill-opacity="0.7"></path>
-          </svg>
-        </div>
-    </section>
-    <!-- About Section -->
-    <section id="about" class="container mx-auto my-16 p-8 rounded-2xl shadow-xl glass backdrop-blur-md reveal fade-in-left">
-        <h2 class="text-4xl font-bold text-center mb-8 text-indigo-700">About</h2>
-        <div class="flex flex-col md:flex-row gap-8 items-center">
-            <img src="pic.jpg" alt="Gurpreet Singh" class="w-full md:w-1/2 rounded-xl shadow-lg max-w-xs mx-auto">
-            <p class="text-lg leading-relaxed text-gray-800 md:w-1/2">DevOps Engineer with over 2.5 years of experience in designing and implementing CI/CD pipelines, automating infrastructure, and leading cloud migration projects. Proficient in Python, Ansible, Terraform, and Kubernetes. Strong background in network security and penetration testing. Recognized for excellent troubleshooting, multitasking, and communication skills.</p>
-        </div>
-    </section>
-    <!-- SVG Divider -->
-    <div class="w-full overflow-hidden leading-none" style="height: 60px;">
-      <svg viewBox="0 0 500 60" preserveAspectRatio="none" class="w-full h-full">
-        <path d="M0,0 C150,60 350,0 500,60 L500,00 L0,0 Z" fill="#a78bfa" fill-opacity="0.15"></path>
-      </svg>
-    </div>
-    <!-- Experience Section -->
-    <section id="experience" class="container mx-auto my-16 p-8 rounded-2xl shadow-xl bg-white/80 backdrop-blur-md reveal fade-in-right">
-        <h2 class="text-4xl font-bold text-center mb-8 text-indigo-700">Experience</h2>
-        <div class="space-y-6">
-            <div class="p-6 rounded-xl bg-gradient-to-r from-indigo-400 to-purple-300 shadow-md">
-                <h3 class="text-2xl font-bold mb-2">DevOps Engineer (SE) at TestingXperts</h3>
-                <p class="text-lg">Chandigarh (2022-PRESENT)</p>
-            </div>
-            <div class="p-6 rounded-xl bg-gradient-to-r from-yellow-300 to-indigo-200 shadow-md">
-                <h3 class="text-2xl font-bold mb-2">Network Security and VAPT Trainee (intern) at EH1 Infotech</h3>
-                <p class="text-lg">Chandigarh (JUN/2018-AUG/2018)</p>
-            </div>
-        </div>
-    </section>
-    <!-- Projects & Skills Section -->
-    <section id="projects-skills" class="container mx-auto my-16 p-8 rounded-2xl shadow-xl bg-white/80 backdrop-blur-md reveal zoom-in">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div>
-                <h2 class="text-4xl font-bold text-center mb-8 text-indigo-700">Projects</h2>
-                <div class="space-y-6">
-                    <div class="p-5 rounded-xl bg-gradient-to-r from-indigo-200 to-purple-100 shadow">
-                        <h3 class="text-2xl font-bold mb-2">Deluxe Corporation (IAC DevOps Engineer)</h3>
-                        <p class="text-lg">Details about the project.</p>
-                    </div>
-                    <div class="p-5 rounded-xl bg-gradient-to-r from-yellow-100 to-indigo-100 shadow">
-                        <h3 class="text-2xl font-bold mb-2">Net Number Migrations — Project Lead (TestingXperts)</h3>
-                        <p class="text-lg">Details about the project.</p>
-                    </div>
-                    <div class="p-5 rounded-xl bg-gradient-to-r from-indigo-100 to-yellow-100 shadow">
-                        <h3 class="text-2xl font-bold mb-2">IACT— Tx Internal (TestingXperts)</h3>
-                        <p class="text-lg">Details about the project.</p>
-                    </div>
-                    <div class="p-5 rounded-xl bg-gradient-to-r from-purple-100 to-indigo-100 shadow">
-                        <h3 class="text-2xl font-bold mb-2">Observability and Chaos Mesh— TX Internal (TestingXperts)</h3>
-                        <p class="text-lg">Details about the project.</p>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <h2 class="text-4xl font-bold text-center mb-8 text-indigo-700">Skills</h2>
-                <div class="grid grid-cols-1 gap-4">
-                    <div class="p-5 rounded-xl bg-gradient-to-r from-indigo-100 to-yellow-100 shadow">
-                        <ul class="list-disc pl-5 text-lg leading-relaxed">
-                            <li>AWS Cloud</li>
-                            <li>Azure and Dev Azure</li>
-                            <li>Google Cloud(GCP)</li>
-                            <li>Linux</li>
-                            <li>CI/CD: Jenkins, Harness</li>
-                            <li>Ansible, Chef, Terraform/Terragrunt</li>
-                        </ul>
-                    </div>
-                    <div class="p-5 rounded-xl bg-gradient-to-r from-yellow-100 to-indigo-100 shadow">
-                        <ul class="list-disc pl-5 text-lg leading-relaxed">
-                            <li>Git, SVN</li>
-                            <li>Docker</li>
-                            <li>Kubernetes, Nexus</li>
-                            <li>Python, Shell Scripting</li>
-                            <li>Cybersecurity, VAPT and Network and system Security</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Education & CV Section -->
-    <section id="education-cv" class="container mx-auto my-16 p-8 rounded-2xl shadow-xl bg-white/80 backdrop-blur-md reveal fade-in-up">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="p-6 rounded-xl bg-gradient-to-r from-indigo-100 to-yellow-100 shadow">
-                <h2 class="text-4xl font-bold text-center mb-8 text-indigo-700">Education</h2>
-                <div class="p-6 bg-white rounded-lg shadow-sm text-gray-900">
-                    <h3 class="text-2xl font-bold mb-2">B. Tech (CSE) from Shaheed Bhagat Singh State Tech. Uni. (SBSSTU)</h3>
-                    <p class="text-lg">Firozpur (2017-2021)</p>
-                </div>
-            </div>
-            <div class="p-6 rounded-xl bg-gradient-to-r from-yellow-100 to-indigo-100 shadow flex flex-col justify-center items-center">
-                <h2 class="text-4xl font-bold text-center mb-8 text-indigo-700">Download CV</h2>
-                <a href="GurpreetCV.pdf" download class="bg-indigo-600 text-white py-2 px-6 rounded-lg hover:bg-indigo-800 transition text-lg font-semibold shadow">Click here to download my CV</a>
-            </div>
-        </div>
-    </section>
-    <!-- Recommendations Section -->
-    <section id="recommendations" class="container mx-auto my-16 p-8 rounded-2xl shadow-xl bg-white/80 backdrop-blur-md reveal fade-in-left">
-        <h2 class="text-4xl font-bold text-center mb-8 text-indigo-700">Recommendations</h2>
-        <div class="space-y-6">
-            <div class="p-5 rounded-xl bg-gradient-to-r from-indigo-100 to-yellow-100 shadow">
-                <p><strong>Manisha Verma</strong> - Software Engineer at TestingXperts</p>
-                <p>A hardworking person with demonstrated outstanding technical abilities in cloud and DevOps. Their technical acumen, problem-solving skills, and ability to mentor others set them apart. Gurpreet is a true asset to any team looking to enhance their operational capabilities.</p>
-            </div>
-            <div class="p-5 rounded-xl bg-gradient-to-r from-yellow-100 to-indigo-100 shadow">
-                <p><strong>Priti Ranga</strong> - DevOps Engineer</p>
-                <p>Gurpreet is an exceptional DevOps Engineer who streamlined our CI/CD processes, managed Azure IaaS, and optimized infrastructure with Terraform. Their technical expertise, problem-solving skills, and proactive approach greatly contributed to our team's success. Highly recommended!</p>
-            </div>
-            <div class="p-5 rounded-xl bg-gradient-to-r from-indigo-100 to-yellow-100 shadow">
-                <p><strong>Mayur Prabhat</strong> - DevSecOps Engineer at Axis Bank</p>
-                <p>A hard working person with high skills and excellent knowledge in DevOps and development.</p>
-            </div>
-            <div class="p-5 rounded-xl bg-gradient-to-r from-yellow-100 to-indigo-100 shadow">
-                <p><strong>Navjit Kaur</strong> - Software Engineer</p>
-                <p>Gurpreet has consistently demonstrated exceptional technical expertise in DevOps practices, streamlining our workflows and improving our software quality. He is a proactive learner who keeps our team updated on industry best practices, a strong communicator who fosters collaboration, and a reliable, deadline-oriented professional. Gurpreet's dedication and skills make him an asset to any organization.</p>
-            </div>
-            <div class="p-5 rounded-xl bg-gradient-to-r from-indigo-100 to-yellow-100 shadow">
-                <p><strong>Gurwinder Singh</strong> - Student at Conestoga College</p>
-                <p>Gurpreet Singh is working hard as a DevOps engineer and he is always eager to work and learn new skills.</p>
-            </div>
-            <div class="p-5 rounded-xl bg-gradient-to-r from-yellow-100 to-indigo-100 shadow">
-                <p><strong>Inder Preet Singh</strong> - Associate Tech Lead - Penetration Tester at Trantor</p>
-                <p>Gurpreet is a motivated, hard-working, and intelligent person who is an expert in his area.</p>
-            </div>
-        </div>
-    </section>
-    <!-- Certifications Section -->
-    <section id="certifications" class="container mx-auto my-16 p-8 rounded-2xl shadow-xl bg-white/80 backdrop-blur-md reveal fade-in-right">
-        <h2 class="text-4xl font-bold text-center mb-8 text-indigo-700">Licenses and Certifications</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div class="p-5 rounded-xl bg-white shadow">
-                <p class="text-xl font-bold">Docker Essentials: A Developer Introduction</p>
-                <p class="text-md">Cognitive Class</p>
-                <p class="text-sm">Issued Jul 2024</p>
-                <p class="text-sm">Credential ID: 46b9e72ec80a4aff9970976f42dbefad</p>
-            </div>
-            <div class="p-5 rounded-xl bg-white shadow">
-                <p class="text-xl font-bold">Python Object-Oriented Programming</p>
-                <p class="text-md">LinkedIn</p>
-                <p class="text-sm">Issued May 2021</p>
-            </div>
-            <div class="p-5 rounded-xl bg-white shadow">
-                <p class="text-xl font-bold">Supervised Learning Essential Training</p>
-                <p class="text-md">LinkedIn</p>
-                <p class="text-sm">Issued May 2021</p>
-            </div>
-            <div class="p-5 rounded-xl bg-white shadow">
-                <p class="text-xl font-bold">AI for everyone</p>
-                <p class="text-md">Coursera</p>
-                <p class="text-sm">Issued Apr 2021</p>
-            </div>
-            <div class="p-5 rounded-xl bg-white shadow">
-                <p class="text-xl font-bold">Network Security and Penetration testing</p>
-                <p class="text-md">EH1Infotech</p>
-                <p class="text-sm">Issued Apr 2018</p>
-            </div>
-            <div class="p-5 rounded-xl bg-white shadow">
-                <p class="text-xl font-bold">Amazon Web Services (AWS)</p>
-                <p class="text-md">Certificate of Completion</p>
-                <p class="text-sm">Issued Jan 2021</p>
-            </div>
-            <div class="p-5 rounded-xl bg-white shadow">
-                <p class="text-xl font-bold">Magnet Forensics APAC Summit</p>
-                <p class="text-md">Linux/Mac Forensics,Cloud and Digital Forensics and Axoim Hands-On</p>
-                <p class="text-md">Certificate of Completion</p>
-                <p class="text-sm">Issued Jun 2020</p>
-            </div>
-        </div>
-    </section>
-    </main>
-    <!-- ASK ME Floating Button -->
-    <button id="askme-btn" class="fixed bottom-6 right-6 z-30 bg-indigo-600 hover:bg-indigo-800 text-white rounded-full shadow-lg p-5 text-2xl font-bold focus:outline-none animate-bounce transition-transform active:scale-90 ripple" aria-label="Ask Me">ASK ME <span class="icon-bounce">💬</span></button>
-    <!-- Modal -->
-    <div id="askme-modal" class="fixed inset-0 flex items-center justify-center modal-bg z-40 hidden">
-      <div class="glass rounded-2xl shadow-2xl p-8 max-w-md w-full relative border border-indigo-200 dark:border-gray-700 modal-anim">
-        <button id="close-modal" class="absolute top-3 right-3 text-gray-400 hover:text-gray-700 text-2xl font-bold ripple">&times;</button>
-        <h3 class="text-2xl font-bold mb-4 text-indigo-700 flex items-center gap-2">Ask Me Anything! <span class="icon-bounce">💬</span></h3>
-        <div id="chat-window" class="h-48 overflow-y-auto mb-4 bg-white/60 dark:bg-gray-800/60 rounded p-2 text-gray-800 dark:text-gray-100 text-base glass border border-gray-200 dark:border-gray-700"></div>
-        <div id="suggestions" class="flex flex-wrap gap-2 mb-2"></div>
-        <form id="ask-form" class="flex gap-2">
-          <input id="ask-input" type="text" class="flex-1 border border-gray-300 dark:border-gray-700 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400 dark:bg-gray-900 dark:text-white" placeholder="Type your question..." autocomplete="off" required />
-          <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-800 transition ripple">Send</button>
-        </form>
-        <div id="typing-indicator" class="mt-2 text-sm text-gray-500 hidden">Gurpreet is typing<span class="animate-pulse">...</span></div>
-      </div>
-    </div>
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white text-center py-4 mt-12">
-        <p>&copy; 2024 Gurpreet Singh. All rights reserved.</p>
-    </footer>
     <script>
-    // Dark/Light mode toggle
-    const themeToggle = document.getElementById('theme-toggle');
-    const themeIcon = document.getElementById('theme-icon');
-    const bodyRoot = document.getElementById('body-root');
-    let darkMode = false;
-    themeToggle.addEventListener('click', () => {
-      darkMode = !darkMode;
-      document.documentElement.classList.toggle('dark', darkMode);
-      themeIcon.textContent = darkMode ? '☀️' : '🌙';
-    });
-    // Mobile menu toggle
-    const menuBtn = document.getElementById('menu-btn');
-    const navList = document.getElementById('nav-list');
-    const mobileMenu = document.getElementById('mobile-menu');
-    menuBtn.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
-    });
-    document.querySelectorAll('#mobile-menu a').forEach(link => {
-      link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
-    });
-    // Section reveal on scroll (with animation classes)
-    function revealSections() {
-      document.querySelectorAll('.reveal').forEach(section => {
-        const rect = section.getBoundingClientRect();
-        if (rect.top < window.innerHeight - 80) {
-          section.classList.add('visible');
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#0f172a', /* slate-900 */
+                        darker: '#020617', /* slate-950 */
+                        accent: '#6366f1', /* indigo-500 */
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    }
+                }
+            }
         }
-      });
-      document.querySelectorAll('.fade-in-up, .fade-in-left, .fade-in-right, .zoom-in').forEach(section => {
-        const rect = section.getBoundingClientRect();
-        if (rect.top < window.innerHeight - 80) {
-          section.classList.add('visible');
+    </script>
+</head>
+
+<body class="bg-darker text-gray-300 font-sans antialiased overflow-x-hidden selection:bg-accent selection:text-white">
+
+    <!-- Background Effects -->
+    <div class="fixed inset-0 z-[-1]">
+        <div class="absolute top-0 left-1/4 w-96 h-96 bg-indigo-900/20 rounded-full blur-3xl animate-pulse"></div>
+        <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-900/20 rounded-full blur-3xl animate-pulse"
+            style="animation-delay: 2s"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0 font-mono font-bold text-xl text-white tracking-tighter">
+                    <span class="text-accent">&lt;</span>Gurpreet<span class="text-accent">/&gt;</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#home" class="nav-link text-sm font-medium hover:text-white transition-colors">Home</a>
+                        <a href="#about"
+                            class="nav-link text-sm font-medium hover:text-white transition-colors">About</a>
+                        <a href="#skills"
+                            class="nav-link text-sm font-medium hover:text-white transition-colors">Skills</a>
+                        <a href="#projects"
+                            class="nav-link text-sm font-medium hover:text-white transition-colors">Projects</a>
+                        <a href="#experience"
+                            class="nav-link text-sm font-medium hover:text-white transition-colors">Experience</a>
+                        <a href="#credentials"
+                            class="nav-link text-sm font-medium hover:text-white transition-colors">Credentials</a>
+                        <a href="#recommendations"
+                            class="nav-link text-sm font-medium hover:text-white transition-colors">Recommendations</a>
+                    </div>
+                </div>
+                <div class="block md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden glass-panel border-t border-gray-800" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home"
+                    class="block px-3 py-2 rounded-md text-base font-medium hover:text-white hover:bg-gray-800">Home</a>
+                <a href="#about"
+                    class="block px-3 py-2 rounded-md text-base font-medium hover:text-white hover:bg-gray-800">About</a>
+                <a href="#skills"
+                    class="block px-3 py-2 rounded-md text-base font-medium hover:text-white hover:bg-gray-800">Skills</a>
+                <a href="#projects"
+                    class="block px-3 py-2 rounded-md text-base font-medium hover:text-white hover:bg-gray-800">Projects</a>
+                <a href="#credentials"
+                    class="block px-3 py-2 rounded-md text-base font-medium hover:text-white hover:bg-gray-800">Credentials</a>
+                <a href="#recommendations"
+                    class="block px-3 py-2 rounded-md text-base font-medium hover:text-white hover:bg-gray-800">Recommendations</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center pt-16 relative">
+        <div class="text-center px-4 max-w-4xl mx-auto z-10 reveal active">
+            <div class="mb-6 relative inline-block">
+                <div
+                    class="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full blur opacity-75 animate-pulse">
+                </div>
+                <img src="pic1.jpg" alt="Gurpreet Singh"
+                    class="relative w-40 h-40 rounded-full object-cover border-4 border-darker shadow-2xl mx-auto">
+            </div>
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 tracking-tight text-white">
+                Hi, I'm <span class="gradient-text">Gurpreet Singh</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-400 mb-8 font-light max-w-2xl mx-auto">
+                DevOps Engineer specializing in Cloud Automation, Security, and Scalable Infrastructure.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4 text-3xl mb-10">
+                <a href="https://linkedin.com/in/ipreetgs" target="_blank"
+                    class="text-gray-400 hover:text-[#0077b5] transition-transform hover:scale-110"><i
+                        class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/ipreetgs" target="_blank"
+                    class="text-gray-400 hover:text-white transition-transform hover:scale-110"><i
+                        class="fab fa-github"></i></a>
+                <a href="https://instagram.com/__gurpreet__23" target="_blank"
+                    class="text-gray-400 hover:text-[#E1306C] transition-transform hover:scale-110"><i
+                        class="fab fa-instagram"></i></a>
+                <a href="mailto:preetgur.gsr@gmail.com"
+                    class="text-gray-400 hover:text-red-400 transition-transform hover:scale-110"><i
+                        class="fas fa-envelope"></i></a>
+            </div>
+            <a href="GurpreetCV.pdf" download
+                class="inline-flex items-center px-8 py-3 border border-transparent text-base font-medium rounded-full text-white bg-indigo-600 hover:bg-indigo-700 md:text-lg transition-all shadow-lg hover:shadow-indigo-500/30">
+                <i class="fas fa-download mr-2"></i> Download CV
+            </a>
+        </div>
+
+        <!-- Scroll Down Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce text-gray-500">
+            <i class="fas fa-chevron-down text-2xl"></i>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-dark">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center reveal">
+                <div class="order-2 md:order-1">
+                    <h2 class="text-3xl font-bold text-white mb-6 flex items-center">
+                        <span class="text-accent mr-3">01.</span> About Me
+                    </h2>
+                    <p class="text-gray-400 leading-relaxed mb-6">
+                        I am a results-driven <strong class="text-white">DevOps Engineer</strong> with extensive
+                        expertise in designing and optimizing CI/CD pipelines, container orchestration, and scalable
+                        cloud infrastructures.
+                    </p>
+                    <p class="text-gray-400 leading-relaxed mb-6">
+                        With a solid technical background in automation, I excel at collaborating with cross-functional
+                        teams to deliver secure, high-performance solutions. My journey includes hands-on experience
+                        with <span class="text-indigo-400">AWS, Azure, GCP</span>, and a strong foundation in <span
+                            class="text-indigo-400">Network Security</span> & <span class="text-indigo-400">Ethical
+                            Hacking</span>.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4 text-sm font-mono text-gray-500">
+                        <div class="flex items-center"><i class="fas fa-caret-right text-accent mr-2"></i>Terraform
+                        </div>
+                        <div class="flex items-center"><i class="fas fa-caret-right text-accent mr-2"></i>Kubernetes
+                        </div>
+                        <div class="flex items-center"><i class="fas fa-caret-right text-accent mr-2"></i>Python</div>
+                        <div class="flex items-center"><i
+                                class="fas fa-caret-right text-accent mr-2"></i>Jenkins/Harness</div>
+                    </div>
+                </div>
+                <div class="order-1 md:order-2 flex justify-center relative">
+                    <div class="relative w-64 h-64 md:w-80 md:h-80">
+                        <div
+                            class="absolute inset-0 border-2 border-accent rounded-xl transform translate-x-4 translate-y-4">
+                        </div>
+                        <img src="pic.jpg" alt="About Image"
+                            class="absolute inset-0 w-full h-full object-cover rounded-xl shadow-lg grayscale hover:grayscale-0 transition-all duration-500">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-24 bg-darker">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
+            <h2 class="text-3xl font-bold text-white mb-12 flex items-center">
+                <span class="text-accent mr-3">02.</span> Technical Arsenal
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Skill Card 1 -->
+                <div class="glass-panel p-6 rounded-xl hover:bg-white/5 transition-colors group">
+                    <div class="text-4xl text-blue-400 mb-4 group-hover:scale-110 transition-transform"><i
+                            class="fas fa-cloud"></i></div>
+                    <h3 class="text-xl font-bold text-white mb-2">Cloud Platforms</h3>
+                    <p class="text-gray-400 text-sm">AWS, Azure, Google Cloud Platform (GCP)</p>
+                </div>
+                <!-- Skill Card 2 -->
+                <div class="glass-panel p-6 rounded-xl hover:bg-white/5 transition-colors group">
+                    <div class="text-4xl text-purple-400 mb-4 group-hover:scale-110 transition-transform"><i
+                            class="fas fa-code-branch"></i></div>
+                    <h3 class="text-xl font-bold text-white mb-2">Infrastructure Automation</h3>
+                    <p class="text-gray-400 text-sm">Terraform, Terragrunt, Ansible, Chef</p>
+                </div>
+                <!-- Skill Card 3 -->
+                <div class="glass-panel p-6 rounded-xl hover:bg-white/5 transition-colors group">
+                    <div class="text-4xl text-green-400 mb-4 group-hover:scale-110 transition-transform"><i
+                            class="fas fa-infinity"></i></div>
+                    <h3 class="text-xl font-bold text-white mb-2">CI/CD & DevOps</h3>
+                    <p class="text-gray-400 text-sm">Jenkins, Harness, Azure DevOps, Git, SVN</p>
+                </div>
+                <!-- Skill Card 4 -->
+                <div class="glass-panel p-6 rounded-xl hover:bg-white/5 transition-colors group">
+                    <div class="text-4xl text-blue-500 mb-4 group-hover:scale-110 transition-transform"><i
+                            class="fab fa-docker"></i></div>
+                    <h3 class="text-xl font-bold text-white mb-2">Containerization</h3>
+                    <p class="text-gray-400 text-sm">Docker, Kubernetes (EKS, AKS), Nexus</p>
+                </div>
+                <!-- Skill Card 5 -->
+                <div class="glass-panel p-6 rounded-xl hover:bg-white/5 transition-colors group">
+                    <div class="text-4xl text-yellow-400 mb-4 group-hover:scale-110 transition-transform"><i
+                            class="fab fa-python"></i></div>
+                    <h3 class="text-xl font-bold text-white mb-2">Scripting</h3>
+                    <p class="text-gray-400 text-sm">Python, BASH/Shell Scripting</p>
+                </div>
+                <!-- Skill Card 6 -->
+                <div class="glass-panel p-6 rounded-xl hover:bg-white/5 transition-colors group">
+                    <div class="text-4xl text-red-500 mb-4 group-hover:scale-110 transition-transform"><i
+                            class="fas fa-shield-alt"></i></div>
+                    <h3 class="text-xl font-bold text-white mb-2">Security & Observability</h3>
+                    <p class="text-gray-400 text-sm">SonarQube, Trivy, Prometheus, Grafana, AppDynamics, Dynatrace, Loki
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 bg-dark">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
+            <h2 class="text-3xl font-bold text-white mb-12 flex items-center">
+                <span class="text-accent mr-3">03.</span> Featured Projects
+            </h2>
+            <div class="space-y-12">
+
+                <!-- Project 1 -->
+                <div class="glass-panel p-8 rounded-2xl relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <i class="fas fa-network-wired text-9xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-2">Deluxe Corporation (DPP)</h3>
+                    <p class="text-accent font-mono text-sm mb-4">Infrastructure-as-Code & CI/CD Pipelines</p>
+                    <ul class="text-gray-400 list-disc list-inside space-y-2 mb-6">
+                        <li>Provisioned v-Sphere infrastructure using Terraform & Terragrunt with reusable modules.</li>
+                        <li>Automated deployments via Harness pipelines, integrating SonarQube & Checkmarx.</li>
+                        <li>Orchestrated zero-downtime blue-green deployments across all environments.</li>
+                        <li>Deployed Dynatrace for real-time observability and performance optimization.</li>
+                    </ul>
+                    <div class="flex flex-wrap gap-2 text-xs font-mono text-indigo-300">
+                        <span class="bg-indigo-900/50 px-3 py-1 rounded-full">Terraform</span>
+                        <span class="bg-indigo-900/50 px-3 py-1 rounded-full">Harness</span>
+                        <span class="bg-indigo-900/50 px-3 py-1 rounded-full">Dynatrace</span>
+                        <span class="bg-indigo-900/50 px-3 py-1 rounded-full">JFrog</span>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="glass-panel p-8 rounded-2xl relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <i class="fas fa-server text-9xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-2">SRA (Solicitors Regulation Authority)</h3>
+                    <p class="text-accent font-mono text-sm mb-4">Migration & Azure Cloud Management</p>
+                    <ul class="text-gray-400 list-disc list-inside space-y-2 mb-6">
+                        <li>Led Azure Landing Zone migration, provisioning Function Apps & Storage Accounts via
+                            Terraform.</li>
+                        <li>Optimized cloud spend by upgrading WebApp SKUs (P2v2 → P3v0) for better performance.</li>
+                        <li>Configured Azure Front Door for global access, security, and routing.</li>
+                        <li>Built Azure dashboards using KQL for proactive anomaly detection.</li>
+                    </ul>
+                    <div class="flex flex-wrap gap-2 text-xs font-mono text-indigo-300">
+                        <span class="bg-indigo-900/50 px-3 py-1 rounded-full">Azure</span>
+                        <span class="bg-indigo-900/50 px-3 py-1 rounded-full">Terraform</span>
+                        <span class="bg-indigo-900/50 px-3 py-1 rounded-full">KQL</span>
+                        <span class="bg-indigo-900/50 px-3 py-1 rounded-full">Front Door</span>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="glass-panel p-8 rounded-2xl relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <i class="fas fa-exchange-alt text-9xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-2">Net Number Migrations</h3>
+                    <p class="text-accent font-mono text-sm mb-4">Repo Migration & Governance</p>
+                    <ul class="text-gray-400 list-disc list-inside space-y-2 mb-6">
+                        <li>Migrated Git/SVN repositories to GitHub with zero disruption.</li>
+                        <li>Developed Python/Shell scripts to verify integrity and commit history.</li>
+                        <li>Implemented repository locking via Ansible to prevent legacy commits.</li>
+                    </ul>
+                    <div class="flex flex-wrap gap-2 text-xs font-mono text-indigo-300">
+                        <span class="bg-indigo-900/50 px-3 py-1 rounded-full">Python</span>
+                        <span class="bg-indigo-900/50 px-3 py-1 rounded-full">Ansible</span>
+                        <span class="bg-indigo-900/50 px-3 py-1 rounded-full">GitHub Migration</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience & Education Section -->
+    <section id="experience" class="py-24 bg-darker">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
+            <h2 class="text-3xl font-bold text-white mb-12 flex items-center">
+                <span class="text-accent mr-3">04.</span> Experience & Education
+            </h2>
+            <div class="relative border-l border-gray-700 ml-4 space-y-12">
+
+                <!-- Exp Item 1 -->
+                <div class="relative pl-8">
+                    <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-accent ring-4 ring-darker"></div>
+                    <h3 class="text-xl font-bold text-white">DevOps Engineer</h3>
+                    <p class="text-indigo-400 text-sm mb-2">TestingXperts | Jan 2022 - Present</p>
+                    <ul class="text-gray-400 text-sm list-disc list-inside space-y-1">
+                        <li>Automated AWS infrastructure provisioning using Terraform & Jenkins.</li>
+                        <li>Optimized AWS VM costs using Lambda for auto-shutdown.</li>
+                        <li>Deployed Python apps on GCP using Cloud Build.</li>
+                        <li>Spearheaded repo migrations to GitHub using Ansible & custom scripts.</li>
+                    </ul>
+                </div>
+
+                <!-- Exp Item 2 -->
+                <div class="relative pl-8">
+                    <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-gray-600 ring-4 ring-darker"></div>
+                    <h3 class="text-xl font-bold text-white">Network Security Trainee</h3>
+                    <p class="text-indigo-400 text-sm mb-2">EH1 Infotech | Jun 2018 - Aug 2018</p>
+                    <p class="text-gray-400 text-sm">Focused on VAPT (Vulnerability Assessment and Penetration Testing)
+                        and Network Security protocols.</p>
+                </div>
+
+                <!-- Edu Item -->
+                <div class="relative pl-8 pt-4">
+                    <div class="absolute -left-[9px] top-4 w-4 h-4 rounded-full bg-indigo-500 ring-4 ring-darker"></div>
+                    <h3 class="text-xl font-bold text-white">B. Tech (Computer Science Engineering)</h3>
+                    <p class="text-indigo-400 text-sm mb-2">Shaheed Bhagat Singh State Technical University | 2017 -
+                        2021</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Credentials Section -->
+    <section id="credentials" class="py-24 bg-dark">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
+            <h2 class="text-3xl font-bold text-white mb-12 flex items-center">
+                <span class="text-accent mr-3">05.</span> Certifications & Awards
+            </h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="glass-panel p-5 rounded-lg border-l-4 border-green-500">
+                    <h4 class="font-bold text-white text-lg">Harness CI/CD & GitOps</h4>
+                    <p class="text-gray-400 text-xs mt-1">Developer & Administrator</p>
+                </div>
+                <div class="glass-panel p-5 rounded-lg border-l-4 border-blue-500">
+                    <h4 class="font-bold text-white text-lg">Google Cloud Digital Leader</h4>
+                    <p class="text-gray-400 text-xs mt-1">Google Cloud</p>
+                </div>
+                <div class="glass-panel p-5 rounded-lg border-l-4 border-yellow-500">
+                    <h4 class="font-bold text-white text-lg">AWS Certificate</h4>
+                    <p class="text-gray-400 text-xs mt-1">Amazon Web Services</p>
+                </div>
+                <div class="glass-panel p-5 rounded-lg border-l-4 border-indigo-500">
+                    <h4 class="font-bold text-white text-lg">Docker Essentials</h4>
+                    <p class="text-gray-400 text-xs mt-1">Cognitive Class</p>
+                </div>
+                <div class="glass-panel p-5 rounded-lg border-l-4 border-red-500">
+                    <h4 class="font-bold text-white text-lg">Network Security & Pentesting</h4>
+                    <p class="text-gray-400 text-xs mt-1">EH1Infotech</p>
+                </div>
+                <div class="glass-panel p-5 rounded-lg border-l-4 border-purple-500">
+                    <h4 class="font-bold text-white text-lg">Python OOP & AI</h4>
+                    <p class="text-gray-400 text-xs mt-1">LinkedIn / Coursera</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recommendations Section -->
+    <section id="recommendations" class="py-24 bg-darker">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
+            <h2 class="text-3xl font-bold text-white mb-12 flex items-center">
+                <span class="text-accent mr-3">06.</span> Recommendations
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                <!-- Rec Card 1 -->
+                <div class="glass-panel p-6 rounded-xl relative">
+                    <i class="fas fa-quote-left text-4xl text-indigo-500/20 absolute top-4 right-4"></i>
+                    <p class="text-gray-300 italic mb-4">"A hardworking person with demonstrated outstanding technical
+                        abilities in cloud and DevOps. Their technical acumen, problem-solving skills, and ability to
+                        mentor others set them apart. Gurpreet is a true asset to any team looking to enhance their
+                        operational capabilities."</p>
+                    <div class="flex items-center mt-4">
+                        <div
+                            class="w-10 h-10 rounded-full bg-indigo-500 flex items-center justify-center text-white font-bold text-lg mr-3">
+                            M</div>
+                        <div>
+                            <h4 class="font-bold text-white">Manisha Verma</h4>
+                            <p class="text-indigo-400 text-xs">Software Engineer at TestingXperts</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rec Card 2 -->
+                <div class="glass-panel p-6 rounded-xl relative">
+                    <i class="fas fa-quote-left text-4xl text-indigo-500/20 absolute top-4 right-4"></i>
+                    <p class="text-gray-300 italic mb-4">"Gurpreet is an exceptional DevOps Engineer who streamlined our
+                        CI/CD processes, managed Azure IaaS, and optimized infrastructure with Terraform. Their
+                        technical expertise, problem-solving skills, and proactive approach greatly contributed to our
+                        team's success. Highly recommended!"</p>
+                    <div class="flex items-center mt-4">
+                        <div
+                            class="w-10 h-10 rounded-full bg-yellow-500 flex items-center justify-center text-white font-bold text-lg mr-3">
+                            P</div>
+                        <div>
+                            <h4 class="font-bold text-white">Priti Ranga</h4>
+                            <p class="text-indigo-400 text-xs">DevOps Engineer</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rec Card 3 -->
+                <div class="glass-panel p-6 rounded-xl relative">
+                    <i class="fas fa-quote-left text-4xl text-indigo-500/20 absolute top-4 right-4"></i>
+                    <p class="text-gray-300 italic mb-4">"Gurpreet has consistently demonstrated exceptional technical
+                        expertise in DevOps practices, streamlining our workflows and improving our software quality. He
+                        is a proactive learner who keeps our team updated on industry best practices, a strong
+                        communicator who fosters collaboration, and a reliable, deadline-oriented professional."</p>
+                    <div class="flex items-center mt-4">
+                        <div
+                            class="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center text-white font-bold text-lg mr-3">
+                            N</div>
+                        <div>
+                            <h4 class="font-bold text-white">Navjit Kaur</h4>
+                            <p class="text-indigo-400 text-xs">Software Engineer</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rec Card 4 -->
+                <div class="glass-panel p-6 rounded-xl relative">
+                    <i class="fas fa-quote-left text-4xl text-indigo-500/20 absolute top-4 right-4"></i>
+                    <p class="text-gray-300 italic mb-4">"Gurpreet is a motivated, hard-working, and intelligent person
+                        who is an expert in his area."</p>
+                    <div class="flex items-center mt-4">
+                        <div
+                            class="w-10 h-10 rounded-full bg-red-500 flex items-center justify-center text-white font-bold text-lg mr-3">
+                            I</div>
+                        <div>
+                            <h4 class="font-bold text-white">Inder Preet Singh</h4>
+                            <p class="text-indigo-400 text-xs">Associate Tech Lead - Penetration Tester at Trantor</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rec Card 5 -->
+                <div class="glass-panel p-6 rounded-xl relative">
+                    <i class="fas fa-quote-left text-4xl text-indigo-500/20 absolute top-4 right-4"></i>
+                    <p class="text-gray-300 italic mb-4">"A hard working person with high skills and excellent knowledge
+                        in DevOps and development."</p>
+                    <div class="flex items-center mt-4">
+                        <div
+                            class="w-10 h-10 rounded-full bg-purple-500 flex items-center justify-center text-white font-bold text-lg mr-3">
+                            M</div>
+                        <div>
+                            <h4 class="font-bold text-white">Mayur Prabhat</h4>
+                            <p class="text-indigo-400 text-xs">DevSecOps Engineer at Axis Bank</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rec Card 6 -->
+                <div class="glass-panel p-6 rounded-xl relative">
+                    <i class="fas fa-quote-left text-4xl text-indigo-500/20 absolute top-4 right-4"></i>
+                    <p class="text-gray-300 italic mb-4">"Gurpreet Singh is working hard as a DevOps engineer and he is
+                        always eager to work and learn new skills."</p>
+                    <div class="flex items-center mt-4">
+                        <div
+                            class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-lg mr-3">
+                            G</div>
+                        <div>
+                            <h4 class="font-bold text-white">Gurwinder Singh</h4>
+                            <p class="text-indigo-400 text-xs">Student at Conestoga College</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-darker py-8 border-t border-gray-800 text-center">
+        <p class="text-gray-500 text-sm">&copy; 2024 Gurpreet Singh. Built with <span class="text-red-500">❤</span> &
+            Code.</p>
+    </footer>
+
+    <!-- Chat Bot Floating Button -->
+    <button id="chatbot-toggle"
+        class="fixed bottom-6 right-6 bg-indigo-600 hover:bg-indigo-700 text-white p-4 rounded-full shadow-2xl z-50 transition-transform hover:scale-110">
+        <i class="fas fa-comment-dots text-2xl"></i>
+    </button>
+
+    <!-- Chat Bot Modal -->
+    <div id="chatbot-modal"
+        class="fixed bottom-24 right-6 w-80 md:w-96 glass-panel rounded-2xl shadow-2xl z-50 hidden flex-col border border-indigo-500/30 overflow-hidden transition-all origin-bottom-right transform scale-95 opacity-0">
+        <div class="bg-indigo-900/80 p-4 flex justify-between items-center border-b border-indigo-500/30">
+            <h3 class="text-white font-bold flex items-center"><i class="fas fa-robot mr-2"></i> DevOps Assistant</h3>
+            <button id="chatbot-close" class="text-gray-300 hover:text-white"><i class="fas fa-times"></i></button>
+        </div>
+        <div id="chat-window" class="h-80 overflow-y-auto p-4 space-y-3 bg-darker/50">
+            <div
+                class="bot-message bg-indigo-900/40 text-gray-200 p-3 rounded-lg rounded-tl-none text-sm inline-block max-w-[85%] border border-indigo-500/20">
+                Hello! I'm Gurpreet's AI assistant. Ask me about his <strong>projects</strong>, <strong>skills</strong>,
+                or <strong>experience</strong>, or click a suggestion below!
+            </div>
+        </div>
+        <div id="suggestions" class="px-4 pb-2 flex gap-2 overflow-x-auto whitespace-nowrap">
+            <button
+                class="suggestion-btn bg-indigo-900/60 border border-indigo-500/30 text-xs text-indigo-200 px-3 py-1 rounded-full hover:bg-indigo-800 transition">Projects?</button>
+            <button
+                class="suggestion-btn bg-indigo-900/60 border border-indigo-500/30 text-xs text-indigo-200 px-3 py-1 rounded-full hover:bg-indigo-800 transition">Skills?</button>
+            <button
+                class="suggestion-btn bg-indigo-900/60 border border-indigo-500/30 text-xs text-indigo-200 px-3 py-1 rounded-full hover:bg-indigo-800 transition">Contact
+                Info</button>
+            <button
+                class="suggestion-btn bg-indigo-900/60 border border-indigo-500/30 text-xs text-indigo-200 px-3 py-1 rounded-full hover:bg-indigo-800 transition">Download
+                CV</button>
+        </div>
+        <div class="p-3 bg-darker border-t border-indigo-500/30">
+            <form id="chat-form" class="flex gap-2">
+                <input type="text" id="chat-input" placeholder="Type a message..."
+                    class="flex-1 bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-indigo-500">
+                <button type="submit"
+                    class="bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-2 rounded-lg transition-colors"><i
+                        class="fas fa-paper-plane"></i></button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Reveal Animations
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
         }
-      });
-    }
-    window.addEventListener('scroll', revealSections);
-    window.addEventListener('DOMContentLoaded', revealSections);
-    // ASK ME modal logic (advanced)
-    const askBtn = document.getElementById('askme-btn');
-    const askModal = document.getElementById('askme-modal');
-    const closeModal = document.getElementById('close-modal');
-    const askForm = document.getElementById('ask-form');
-    const askInput = document.getElementById('ask-input');
-    const chatWindow = document.getElementById('chat-window');
-    const typingIndicator = document.getElementById('typing-indicator');
-    const suggestions = document.getElementById('suggestions');
-    const suggestionList = [
-      'Show me your skills',
-      'Tell me about your experience',
-      'List your projects',
-      'Show your education',
-      'Download your CV',
-      'Contact info',
-      'Show certifications',
-      'Show recommendations'
-    ];
-    function renderSuggestions() {
-      suggestions.innerHTML = '';
-      suggestionList.forEach(s => {
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = 'bg-indigo-100 hover:bg-indigo-200 text-indigo-700 rounded px-3 py-1 text-sm transition mb-1';
-        btn.textContent = s;
-        btn.onclick = () => {
-          askInput.value = s;
-          askForm.dispatchEvent(new Event('submit', {cancelable: true, bubbles: true}));
-        };
-        suggestions.appendChild(btn);
-      });
-    }
-    // Chat modal pop/slide in
-    const chatModalAnim = askModal.querySelector('.modal-anim');
-    askBtn.addEventListener('click', () => {
-      askModal.classList.remove('hidden');
-      setTimeout(() => chatModalAnim.classList.add('visible'), 10);
-      askInput.focus();
-      renderSuggestions();
-    });
-    closeModal.addEventListener('click', () => {
-      chatModalAnim.classList.remove('visible');
-      setTimeout(() => askModal.classList.add('hidden'), 400);
-      chatWindow.innerHTML = '';
-      askInput.value = '';
-    });
-    function addCopyButton(answer, html) {
-      if (/(mailto:|linkedin|igli|CV|email|@)/i.test(answer)) {
-        return html + `<button class='ml-2 px-2 py-1 bg-gray-200 dark:bg-gray-700 rounded text-xs text-gray-700 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600' onclick='navigator.clipboard.writeText(` + JSON.stringify(answer.replace(/<[^>]+>/g, '')) + `)'>Copy</button>`;
-      }
-      return html;
-    }
-    // Chat message fade/slide in
-    function appendMessage(html, isBot) {
-      const div = document.createElement('div');
-      div.className = 'mb-2 flex items-center msg-anim';
-      div.innerHTML = html;
-      chatWindow.appendChild(div);
-      setTimeout(() => div.classList.add('visible'), 10);
-      chatWindow.scrollTop = chatWindow.scrollHeight;
-    }
-    askForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const q = askInput.value.trim();
-      if (!q) return;
-      appendMessage(`<span class='font-semibold text-indigo-700 mr-2'>🧑‍💻 You:</span> <span>${q.replace(/</g, '&lt;')}</span>`, false);
-      askInput.value = '';
-      chatWindow.scrollTop = chatWindow.scrollHeight;
-      typingIndicator.classList.remove('hidden');
-      setTimeout(() => {
-        let answer = '';
-        let plain = '';
-        const ql = q.toLowerCase();
-        if (ql.includes('skill')) {
-          answer = `<ul class='list-disc pl-5'><li>🟣 AWS, Azure, GCP, Linux</li><li>🟡 CI/CD: Jenkins, Harness</li><li>🟢 Ansible, Chef, Terraform/Terragrunt</li><li>🔵 Git, SVN, Docker, Kubernetes, Nexus</li><li>🐍 Python, Shell Scripting</li><li>🛡️ Cybersecurity, VAPT, Network & System Security</li></ul>`;
-          plain = 'AWS, Azure, GCP, Linux, Jenkins, Harness, Ansible, Chef, Terraform, Terragrunt, Git, SVN, Docker, Kubernetes, Nexus, Python, Shell Scripting, Cybersecurity, VAPT, Network & System Security';
-        } else if (ql.includes('experience')) {
-          answer = `<ul class='list-disc pl-5'><li>DevOps Engineer (SE) at TestingXperts (2022-PRESENT)</li><li>Network Security and VAPT Trainee at EH1 Infotech (2018)</li></ul>`;
-          plain = 'DevOps Engineer (SE) at TestingXperts (2022-PRESENT), Network Security and VAPT Trainee at EH1 Infotech (2018)';
-        } else if (ql.includes('project')) {
-          answer = `<ul class='list-disc pl-5'><li>Deluxe Corporation (IAC DevOps Engineer)</li><li>Net Number Migrations — Project Lead</li><li>IACT— Tx Internal</li><li>Observability and Chaos Mesh— TX Internal</li></ul>`;
-          plain = 'Deluxe Corporation (IAC DevOps Engineer), Net Number Migrations — Project Lead, IACT— Tx Internal, Observability and Chaos Mesh— TX Internal';
-        } else if (ql.includes('education')) {
-          answer = `🎓 B. Tech (CSE) from Shaheed Bhagat Singh State Tech. Uni. (SBSSTU), Firozpur (2017-2021)`;
-          plain = 'B. Tech (CSE) from Shaheed Bhagat Singh State Tech. Uni. (SBSSTU), Firozpur (2017-2021)';
-        } else if (ql.includes('cv') || ql.includes('resume')) {
-          answer = `<a href='GurpreetCV.pdf' download class='underline text-indigo-700'>📄 Download my CV here</a>`;
-          plain = 'GurpreetCV.pdf';
-        } else if (ql.includes('contact') || ql.includes('email')) {
-          answer = `📧 Email: <a href='mailto:preetgur.gsr@gmail.com' class='underline text-indigo-700'>preetgur.gsr@gmail.com</a><br>🔗 LinkedIn: <a href='https://www.linkedin.com/in/ipreetgs/' target='_blank' class='underline text-indigo-700'>linkedin.com/in/ipreetgs</a>`;
-          plain = 'preetgur.gsr@gmail.com, linkedin.com/in/ipreetgs';
-        } else if (ql.includes('certification') || ql.includes('license')) {
-          answer = `<ul class='list-disc pl-5'><li>Docker Essentials: A Developer Introduction (Cognitive Class, 2024)</li><li>Python OOP (LinkedIn, 2021)</li><li>Supervised Learning (LinkedIn, 2021)</li><li>AI for everyone (Coursera, 2021)</li><li>Network Security and Penetration testing (EH1Infotech, 2018)</li><li>AWS (2021)</li><li>Magnet Forensics APAC Summit (2020)</li></ul>`;
-          plain = 'Docker Essentials: A Developer Introduction (Cognitive Class, 2024), Python OOP (LinkedIn, 2021), Supervised Learning (LinkedIn, 2021), AI for everyone (Coursera, 2021), Network Security and Penetration testing (EH1Infotech, 2018), AWS (2021), Magnet Forensics APAC Summit (2020)';
-        } else if (ql.includes('recommend')) {
-          answer = `Gurpreet is highly recommended by colleagues for DevOps, CI/CD, and security expertise. See full recommendations in the Recommendations section above!`;
-          plain = 'Gurpreet is highly recommended by colleagues for DevOps, CI/CD, and security expertise.';
-        } else {
-          answer = `😅 Sorry, I can answer questions about my skills, experience, projects, education, CV, contact, certifications, and recommendations. Try asking about one of those!`;
-          plain = 'Sorry, I can answer questions about my skills, experience, projects, education, CV, contact, certifications, and recommendations.';
+        window.addEventListener("scroll", reveal);
+        reveal(); // Trigger once on load
+
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Chatbot Logic
+        const chatToggle = document.getElementById('chatbot-toggle');
+        const chatModal = document.getElementById('chatbot-modal');
+        const chatClose = document.getElementById('chatbot-close');
+        const chatForm = document.getElementById('chat-form');
+        const chatInput = document.getElementById('chat-input');
+        const chatWindow = document.getElementById('chat-window');
+        const suggestionBtns = document.querySelectorAll('.suggestion-btn');
+
+        chatToggle.addEventListener('click', () => {
+            chatModal.classList.toggle('hidden');
+            setTimeout(() => {
+                chatModal.classList.toggle('scale-95');
+                chatModal.classList.toggle('opacity-0');
+            }, 10);
+            if (!chatModal.classList.contains('hidden')) chatInput.focus();
+        });
+
+        chatClose.addEventListener('click', () => {
+            chatModal.classList.add('scale-95');
+            chatModal.classList.add('opacity-0');
+            setTimeout(() => chatModal.classList.add('hidden'), 300);
+        });
+
+        suggestionBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const text = btn.textContent;
+                addMessage(text, true);
+                processMessage(text);
+            });
+        });
+
+        function addMessage(text, isUser) {
+            const div = document.createElement('div');
+            div.className = isUser
+                ? 'user-message bg-indigo-600 text-white p-3 rounded-lg rounded-tr-none text-sm ml-auto max-w-[85%] mb-2'
+                : 'bot-message bg-indigo-900/40 text-gray-200 p-3 rounded-lg rounded-tl-none text-sm inline-block max-w-[85%] border border-indigo-500/20 mb-2';
+            div.innerHTML = text;
+            chatWindow.appendChild(div);
+            chatWindow.scrollTop = chatWindow.scrollHeight;
         }
-        let html = `<span class='font-semibold text-indigo-600 mr-2 icon-bounce'>🤖 Gurpreet:</span> <span>${answer}</span>`;
-        html = addCopyButton(plain, html);
-        appendMessage(html, true);
-        typingIndicator.classList.add('hidden');
-      }, 700 + Math.random()*600);
-    });
-    // Close modal on outside click
-    askModal.addEventListener('click', (e) => {
-      if (e.target === askModal) {
-        askModal.classList.add('hidden');
-        chatWindow.innerHTML = '';
-        askInput.value = '';
-      }
-    });
+
+        function processMessage(msgOriginal) {
+            const msg = msgOriginal.trim().toLowerCase();
+
+            // Simulate typing delay
+            setTimeout(() => {
+                let response = "I'm not sure about that. Try asking about 'Projects', 'Skills', or 'Experience'.";
+
+                // Location / Origin
+                if (msg.includes('where') || msg.includes('from') || msg.includes('live') || msg.includes('location')) {
+                    response = "Gurpreet is from **Punjab, India**. He completed his B.Tech in Computer Science from SBSSTU, Firozpur.";
+                }
+                // Greeting
+                else if (msg.match(/^(hi|hello|hey|greetings)/)) {
+                    response = "Hello! I am Gurpreet's portfolio assistant. I can tell you about his DevOps experience, cloud skills, and key projects like **Deluxe** and **SRA**.";
+                }
+                // Experience / Company
+                else if (msg.includes('experience') || msg.includes('work') || msg.includes('job') || msg.includes('company')) {
+                    response = "Gurpreet is currently a **DevOps Engineer at TestingXperts** (Jan 2022 - Present), working on AWS/GCP automation. Previously, he was a Network Security Trainee at **EH1 Infotech**.";
+                }
+                // Skills
+                else if (msg.includes('skill') || msg.includes('tech') || msg.includes('stack')) {
+                    response = "He is an expert in: <br>• <strong>Cloud</strong>: AWS, Azure, GCP<br>• <strong>IaC</strong>: Terraform, Ansible<br>• <strong>CI/CD</strong>: Jenkins, Harness<br>• <strong>Tools</strong>: Docker, Kubernetes, Python";
+                }
+                // Projects - General
+                else if (msg.includes('project') || msg.includes('portfolio')) {
+                    response = "Key Projects include:<br>1. <strong>Deluxe Corp</strong> (IaC & CI/CD)<br>2. <strong>SRA Azure Migration</strong><br>3. <strong>Net Number</strong> (Repo Migration)<br>4. <strong>IACT</strong> (Terraform Scripts)<br>Ask me about a specific one!";
+                }
+                // Specific Projects
+                else if (msg.includes('deluxe') || msg.includes('dpp')) {
+                    response = "For **Deluxe Corp**, he managed IaC with Terraform, automated deployments via Harness (Blue-Green), and implemented Dynatrace monitoring for zero-downtime releases.";
+                }
+                else if (msg.includes('sra') || msg.includes('solicitor')) {
+                    response = "For **SRA**, he led the Azure Landing Zone migration, optimized cloud costs by upgrading WebApps, and configured Azure Front Door for global security.";
+                }
+                else if (msg.includes('net number') || msg.includes('migration')) {
+                    response = "For **Net Number**, he migrated Git/SVN repos to GitHub using Python/Shell scripts to verify integrity and Ansible to lock legacy repos.";
+                }
+                // Certifications
+                else if (msg.includes('cert') || msg.includes('award') || msg.includes('license')) {
+                    response = "He holds certifications in:<br>• <strong>Harness CI/CD</strong><br>• <strong>Google Cloud Digital Leader</strong><br>• <strong>AWS</strong><br>• <strong>Docker Essentials</strong><br>• <strong>Network Security</strong>";
+                }
+                // Contact
+                else if (msg.includes('contact') || msg.includes('email') || msg.includes('phone')) {
+                    response = "📧 <a href='mailto:preetgur.gsr@gmail.com' class='text-accent underline'>preetgur.gsr@gmail.com</a><br>🔗 <a href='https://linkedin.com/in/ipreetgs' target='_blank' class='text-accent underline'>LinkedIn Profile</a>";
+                }
+                // CV
+                else if (msg.includes('cv') || msg.includes('resume') || msg.includes('download')) {
+                    response = "📄 <a href='GurpreetCV.pdf' download class='text-accent underline'>Click here to download his CV</a> directly.";
+                }
+                // Default fallback helper
+                else {
+                    response = "I didn't quite catch that. Try asking: <em>'What did he do at Deluxe?'</em> or <em>'List his skills'</em>.";
+                }
+
+                addMessage(response, false);
+            }, 600);
+        }
+
+        chatForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const msg = chatInput.value.trim();
+            if (!msg) return;
+
+            addMessage(msg, true);
+            chatInput.value = '';
+            processMessage(msg);
+        });
     </script>
 </body>
+
 </html>
